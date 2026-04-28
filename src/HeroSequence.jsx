@@ -2,8 +2,8 @@ import React, { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform, useMotionValueEvent, useMotionValue, useSpring } from 'framer-motion';
 
 const framesPerSeq = 240;
-const getHeroFrame = (index) => `/heroimg/ezgif-frame-${index.toString().padStart(3, '0')}.jpg`;
-const getBodyFrame = (index) => `/bodyimg/ezgif-frame-${index.toString().padStart(3, '0')}.jpg`;
+const getHeroFrame = (index) => `${import.meta.env.BASE_URL}heroimg/ezgif-frame-${index.toString().padStart(3, '0')}.jpg`;
+const getBodyFrame = (index) => `${import.meta.env.BASE_URL}bodyimg/ezgif-frame-${index.toString().padStart(3, '0')}.jpg`;
 
 
 export default function HeroSequence() {
