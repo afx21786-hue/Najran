@@ -1,0 +1,496 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@300;400;700&family=El+Messiri:wght@400;500;600;700&display=swap');
+
+:root {
+  --obsidian: #050505;
+  --obsidian-light: #121212;
+  --scarlet: #8b0000;
+  --scarlet-dark: #3e0101;
+  --scarlet-glow: rgba(139, 0, 0, 0.4);
+  --text-primary: #f5f5f7;
+  --text-secondary: rgba(245, 245, 247, 0.6);
+  --glass-bg: rgba(20, 20, 20, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.05);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Cinzel', serif;
+  background-color: var(--obsidian);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(139, 0, 0, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 85% 30%, rgba(139, 0, 0, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 50% 80%, rgba(62, 1, 1, 0.15) 0%, transparent 60%);
+  background-attachment: fixed;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cinzel', serif;
+  letter-spacing: -0.02em;
+}
+
+/* Typography Utility */
+.font-eastern {
+  font-family: 'Cinzel', serif;
+}
+
+.tracking-wide {
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.5) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-scarlet-gradient {
+  background: linear-gradient(135deg, #ff4d4d 0%, var(--scarlet) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gold-gradient {
+  background: linear-gradient(135deg, #F9F3D3 0%, #D4AF37 50%, #AA7C11 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Layout */
+.app-container {
+  position: relative;
+  width: 100%;
+}
+
+.section {
+  min-height: 100vh;
+  padding: 8rem 5%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 2;
+}
+
+/* Glassmorphism */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  position: relative;
+}
+
+.glass-panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Floating Elements Container */
+.floating-elements-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.floating-item {
+  position: absolute;
+  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.8));
+  will-change: transform;
+}
+
+.depth-blur {
+  filter: blur(8px) drop-shadow(0 20px 30px rgba(0, 0, 0, 0.5));
+  opacity: 0.6;
+}
+
+/* Navigation */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 2rem 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  background: linear-gradient(to bottom, rgba(5,5,5,0.9) 0%, transparent 100%);
+}
+
+.logo {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: -0.05em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 3rem;
+}
+
+.nav-links a {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--scarlet);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.nav-links a:hover {
+  color: var(--scarlet);
+}
+
+/* Buttons */
+.btn-primary {
+  background: linear-gradient(135deg, var(--scarlet) 0%, var(--scarlet-dark) 100%);
+  color: white;
+  border: none;
+  padding: 1rem 2.5rem;
+  border-radius: 100px;
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 10px 20px var(--scarlet-glow);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-primary:hover::before {
+  opacity: 1;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 15px 25px rgba(139, 0, 0, 0.6);
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  align-items: center;
+}
+
+.hero-subtitle {
+  color: var(--scarlet);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.hero h1 {
+  font-size: clamp(4rem, 8vw, 8rem);
+  line-height: 1;
+  margin-bottom: 2rem;
+  font-weight: 800;
+}
+
+.hero p {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* Products Section */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 4rem;
+}
+
+.product-card {
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 400px;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.product-card:hover {
+  transform: translateY(-10px);
+}
+
+.product-card .category {
+  font-size: 0.8rem;
+  color: var(--scarlet);
+  margin-bottom: 0.5rem;
+}
+
+.product-card h3 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* Heritage Section */
+.heritage-content {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+}
+
+.heritage-text {
+  flex: 1;
+}
+
+.heritage-text h2 {
+  font-size: clamp(3rem, 5vw, 5rem);
+  margin-bottom: 2rem;
+}
+
+.heritage-text p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.heritage-visual {
+  flex: 1;
+  position: relative;
+  height: 600px;
+}
+
+.blur-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: -1;
+}
+
+.orb-1 {
+  width: 300px; height: 300px;
+  background: var(--scarlet-dark);
+  top: 10%; right: 10%;
+}
+
+.orb-2 {
+  width: 200px; height: 200px;
+  background: rgba(40, 0, 0, 0.8);
+  bottom: 20%; left: 20%;
+}
+
+/* Footer */
+footer {
+  padding: 4rem 5%;
+  border-top: 1px solid var(--glass-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--obsidian);
+  position: relative;
+  z-index: 10;
+}
+
+.footer-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.footer-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: white;
+}
+
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  .nav-links {
+    gap: 1.5rem;
+  }
+  .heritage-content {
+    flex-direction: column;
+  }
+  .heritage-visual {
+    height: 300px;
+    width: 100%;
+  }
+}
+
+/* --- Hero Sequence Styles --- */
+.hero-sequence-container {
+  height: 900vh;
+  position: relative;
+  width: 100%;
+}
+
+.hero-sequence-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--obsidian);
+}
+
+.hero-sequence-img-wrapper {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 0;
+}
+
+.hero-sequence-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.upscale {
+  image-rendering: high-quality;
+  image-rendering: -webkit-optimize-contrast; /* Optimizes crispness over smooth blurring */
+  filter: saturate(1.1) contrast(1.05); /* Slight color and clarity boost without aggressive artifacts */
+}
+
+.hero-sequence-content-wrapper {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.hero-sequence-text {
+  pointer-events: auto;
+  padding: 0 5%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* --- Interactive Hotspots --- */
+.nut-hotspot {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  transform: translate(-50%, -50%);
+  outline: none;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+  text-decoration: none;
+}
+
+.nut-hotspot::after {
+  content: '+';
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 300;
+}
+
+.nut-hotspot:hover {
+  background: var(--scarlet);
+  border: 1px solid var(--scarlet);
+  transform: translate(-50%, -50%) scale(1.15);
+  box-shadow: 0 0 20px rgba(139, 0, 0, 0.6);
+}
+
+.nut-hotspot .nut-tooltip {
+  position: absolute;
+  bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: var(--obsidian);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--glass-border);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  z-index: 10;
+}
+
+.nut-hotspot:hover .nut-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
